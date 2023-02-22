@@ -114,7 +114,7 @@ public class Main {
     private static void saveAsssignment(Asssignment asssignment) {
         for (int i = 0; i < asssignments.length; i++) {
             if (asssignments[i] == null){
-                asssignments[i]= asssignment;
+                asssignments[i] = asssignment;
             }
         }
     }

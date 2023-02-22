@@ -1,6 +1,8 @@
 package entity;
 
-public class Person {
+import java.util.Scanner;
+
+public class Person implements Inputable{
     private String name;
     private String address;
     private String phone;
@@ -36,5 +38,14 @@ public class Person {
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
                 '}';
+    }
+
+    public void inputInfo() {
+        System.out.printf("Mời nhập họ tên ");
+        this.name = new Scanner(System.in).nextLine();
+        System.out.printf("Mời nhập địa chỉ ");
+        this.address = new Scanner(System.in).nextLine();
+        System.out.printf("Mời nhập số điện thoại tài xế ");
+        this.phone = new Scanner(System.in).nextLine();
     }
 }

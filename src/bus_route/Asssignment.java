@@ -8,6 +8,9 @@ public class Asssignment {
     private Driver driver;
     private BusRouteDetail[] busRouteDetailtes;
 
+    public Asssignment(Driver driver, BusRouteDetail[] busRouteDetails) {
+    }
+
     public Driver getDriver() {
         return driver;
     }
@@ -30,5 +33,8 @@ public class Asssignment {
                 "driver=" + driver +
                 ", busRouteDetailtes=" + Arrays.toString(busRouteDetailtes) +
                 '}';
+    }
+
+    public void inputInfo() {
     }
 }

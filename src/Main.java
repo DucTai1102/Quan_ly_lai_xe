@@ -1,4 +1,6 @@
+import bus_route.Asssignment;
 import bus_route.BusRoute;
+import bus_route.BusRouteDetail;
 import entity.Driver;
 
 import java.util.Scanner;
@@ -7,6 +9,7 @@ public class Main {
 
     private static Driver[] drivers = new Driver[100];
     private static BusRoute[] busRoutes = new BusRoute[100];
+    private static Asssignment[] asssignments = new Asssignment[100];
 
     public static void main(String[] args) {
         menu();
@@ -38,37 +41,73 @@ public class Main {
     private static void assignment() {
         System.out.println("Muốn phân công cho bao nhiêu tài xế: ");
         int driverNum = new Scanner(System.in).nextInt();
+        Driver driver = null;
+        BusRouteDetail[] busRouteDetails = new BusRouteDetail[0];
         for (int i = 0; i < driverNum; i++) {
             //xác minh tài xế
             System.out.println("Mã của tài xế là: ");
             int driverID = new Scanner(System.in).nextInt();
             do {
-                Driver driver = null;
+                driver = null;
                 for (int j = 0; j < drivers.length; j++) {
-                    if(drivers[j] != null && drivers[j].getId() == driverID) {
+                    if (drivers[j] != null && drivers[j].getId() == driverID) {
                         driver = drivers[j];
                         break;
                     }
                 }
-                if(driver != null){
+                if (driver != null) {
                     break;
                 }
-                System.out.printf("Tài xế không hợp lệ");
-            }while (true);
-            //Xác định số tuyến
-                System.out.printf("Số tuyến muốn phân công: ");
-                int temp;
+                System.out.printf("Mã tài xế không hợp lệ");
+            } while (true);
+            //Xác minh ID và số tuyến
+            System.out.println("Muốn phân công cho bao nhiêu tuyến: ");
+            int routeNum = new Scanner(System.in).nextInt();
+            int cont = 0;
+            busRouteDetails = new BusRouteDetail[routeNum];
+            for (int j = 0; j < routeNum; j++) {
+                //xác minh ID tuyến
+                System.out.println("Mã của tuyến là: ");
+                int busRouteID = new Scanner(System.in).nextInt();
+                BusRoute busRoute;
                 do {
-                    temp = new Scanner(System.in).nextInt();
-                    if (temp >= 1 && temp <= 15 ){
+                    busRoute = null;
+                    for (int k = 0; k < busRoutes.length; k++) {
+                        if (busRoutes[k] != null && busRoutes[k].getId() == busRouteID) {
+                            busRoute = busRoutes[k];
+                            break;
+                        }
+                    }
+                    if (busRoute != null) {
+                        break;
+                    }
+                    System.out.printf("Mã tuyến không hợp lệ");
+                } while (true);
+                //Xác định số lượt
+                System.out.printf("Tuyến muốn phân công là: ");
+                int turn;
+                do {
+                    turn = new Scanner(System.in).nextInt();
+                    if (turn >= 1 && turn <= 15) {
                         break;
                     }
                     System.out.printf("Lựa chọn không hợp lệ vui lòng chọn lại ");
-                }while (true);
-            // Xác định tuyến
-                System.out.printf("Tuyến muốn phân công là: ");
+                } while (true);
+                BusRouteDetail detail = new BusRouteDetail(busRoute, turn);
+                busRouteDetails[cont] = detail;
+                cont++;
+            }
         }
+        Asssignment asssignment = new Asssignment(driver, busRouteDetails);
+        saveAsssignment(asssignment);
+    }
 
+    private static void saveAsssignment(Asssignment asssignment) {
+        for (int i = 0; i < asssignments.length; i++) {
+            if (asssignments[i] == null){
+                asssignments[i]= asssignment;
+            }
+        }
     }
 
     private static void showBusRoute() {
@@ -92,7 +131,7 @@ public class Main {
     private static void saveBusRoute(BusRoute busRoute) {
         for (int i = 0; i < busRoutes.length; i++) {
             if (busRoutes[i] == null){
-                busRoutes[i].inputInfo();
+                busRoutes[i] = busRoute;
             }
         }
     }
@@ -117,7 +156,7 @@ public class Main {
     private static void saveDriver(Driver driver) {
         for (int i = 0; i < drivers.length; i++)
             if (drivers[i] == null) {
-                drivers[i].inputInfo();
+                drivers[i] = driver;
             }
     }
     private static int functionChoice() {

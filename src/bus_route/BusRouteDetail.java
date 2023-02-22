@@ -4,6 +4,11 @@ public class BusRouteDetail {
     private BusRoute busRoute;
     private int drivingTurn;
 
+    public BusRouteDetail(BusRoute busRoute, int drivingTurn) {
+        this.busRoute = busRoute;
+        this.drivingTurn = drivingTurn;
+    }
+
     public BusRoute getBusRoute() {
         return busRoute;
     }

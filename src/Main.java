@@ -29,11 +29,20 @@ public class Main {
                 case 4: showBusRoute();
                     break;
                 case 5: assignment();
+                        showAssignment();
                     break;
                 case 6:
                     break;
                 case 7:
                     return;
+            }
+        }
+    }
+
+    private static void showAssignment() {
+        for (int i = 0; i < asssignments.length; i++) {
+            if(asssignments[i] != null) {
+                System.out.println(asssignments[i]);
             }
         }
     }
